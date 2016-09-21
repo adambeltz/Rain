@@ -1,6 +1,8 @@
 //finished game programming episode 7 from the cherno project
 package com.adb.rain;
 
+import com.adb.rain.graphics.Screen;
+
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -19,6 +21,8 @@ public class Game extends Canvas implements Runnable{
     private JFrame frame;
     private boolean running = false;
 
+    private Screen screen;
+
     //Create an image
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     //Converting image object into an array of integers-the pixels
@@ -29,7 +33,10 @@ public class Game extends Canvas implements Runnable{
         Dimension size = new Dimension(width*scale, height*scale);
         setPreferredSize(size);
 
+        screen = new Screen(width, height);
+
         frame = new JFrame();
+
 
     }
 
@@ -72,11 +79,22 @@ public class Game extends Canvas implements Runnable{
             return;
         }
 
+        screen.render();
+
+        //sets pixel array data from Screen class to pixel array in game class
+        for (int i = 0; i < pixels.length; i++) {
+            pixels[i] = screen.pixels[i];
+        }
+
         Graphics g = bs.getDrawGraphics();
         // Set the color of g - will fill Rect with this color
         g.setColor(Color.BLACK);
         // Fill the frame with the size
         g.fillRect(0, 0, getWidth(), getHeight());
+
+
+        // draws from pixel data
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 
         // Removes the graphics from the screen after they have been displayed
         g.dispose();
