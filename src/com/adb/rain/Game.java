@@ -1,4 +1,4 @@
-//finished game programming episode 7 from the cherno project
+//finished game programming episode 14 from the cherno project
 package com.adb.rain;
 
 import com.adb.rain.graphics.Screen;
@@ -16,6 +16,7 @@ public class Game extends Canvas implements Runnable{
     public static int width = 300;
     public static int height = width / 16* 9;
     public static int scale = 3;
+    public static String title = "Rain";
 
     private Thread thread;
     private JFrame frame;
@@ -58,12 +59,39 @@ public class Game extends Canvas implements Runnable{
     // This method is automatically run when a new thread is started with thread.start()
     @Override
     public void run() {
+        long lastTime = System.nanoTime();
+        long timer = System.currentTimeMillis();
+        final double ns = 1000000000.0 / 60.0;
+        double delta = 0;
+        int frames = 0;
+        int updates = 0;
         while(running) {
-            // Update will be limited to 60fps
-            update();
+
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while (delta >= 1) {
+                // Update will be limited to 60fps
+                update();
+                updates++;
+                delta--;
+            }
+
+
+
             render();
+            frames++;
+
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                System.out.println(updates + " ups, " + frames + " fps");
+                frame.setTitle(title +"  |  " + updates + " ups, " + frames + " fps");
+                updates = 0;
+                frames = 0;
+            }
 
         }
+        stop();
 
     }
 
@@ -78,6 +106,9 @@ public class Game extends Canvas implements Runnable{
             createBufferStrategy(3);
             return;
         }
+
+        //Clears graphics off of screen before rendering again
+        screen.clear();
 
         screen.render();
 
@@ -107,7 +138,7 @@ public class Game extends Canvas implements Runnable{
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
-        game.frame.setTitle("Rain");
+        game.frame.setTitle(title);
         game.frame.add(game);
         // .pack pulls information from PreferredSize
         game.frame.pack();
