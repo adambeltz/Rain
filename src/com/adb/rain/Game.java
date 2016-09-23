@@ -1,7 +1,8 @@
-//finished game programming episode 14 from the cherno project
+//finished game programming episode 19 from the cherno project
 package com.adb.rain;
 
 import com.adb.rain.graphics.Screen;
+import com.adb.rain.input.Keyboard;
 
 import javax.swing.JFrame;
 import java.awt.*;
@@ -20,6 +21,8 @@ public class Game extends Canvas implements Runnable{
 
     private Thread thread;
     private JFrame frame;
+
+    private Keyboard key; // Imported from keyboard.java-as its a different package
     private boolean running = false;
 
     private Screen screen;
@@ -35,8 +38,10 @@ public class Game extends Canvas implements Runnable{
         setPreferredSize(size);
 
         screen = new Screen(width, height);
-
         frame = new JFrame();
+
+        key = new Keyboard();
+        addKeyListener(key); // add this after key = new Keyboard();
 
 
     }
@@ -98,8 +103,12 @@ public class Game extends Canvas implements Runnable{
     int x = 0, y = 0;
 
     public void update(){
-        x++;
-        y++;
+        key.update();
+        if (key.up) y--;
+        if (key.down) y++;
+        if (key.left) x--;
+        if (key.right) x++;
+
 
     }
 
