@@ -95,7 +95,11 @@ public class Game extends Canvas implements Runnable{
 
     }
 
+    int x = 0, y = 0;
+
     public void update(){
+        x++;
+        y++;
 
     }
 
@@ -110,7 +114,7 @@ public class Game extends Canvas implements Runnable{
         //Clears graphics off of screen before rendering again
         screen.clear();
 
-        screen.render();
+        screen.render(x, y);
 
         //sets pixel array data from Screen class to pixel array in game class
         for (int i = 0; i < pixels.length; i++) {
