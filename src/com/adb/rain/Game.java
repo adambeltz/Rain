@@ -1,4 +1,4 @@
-//finished game programming episode 19 from the cherno project
+//finished game programming episode 20 from the cherno project
 package com.adb.rain;
 
 import com.adb.rain.graphics.Screen;
