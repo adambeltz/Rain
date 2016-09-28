@@ -1,4 +1,4 @@
-//finished game programming episode 20 from the cherno project
+//finished game programming episode 29 from the cherno project
 package com.adb.rain;
 
 import com.adb.rain.graphics.Screen;
@@ -70,6 +70,7 @@ public class Game extends Canvas implements Runnable{
         double delta = 0;
         int frames = 0;
         int updates = 0;
+        requestFocus();
         while(running) {
 
             long now = System.nanoTime();

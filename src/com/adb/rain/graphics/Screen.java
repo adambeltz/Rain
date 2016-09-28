@@ -1,6 +1,8 @@
 package com.adb.rain.graphics;
 
 
+import com.adb.rain.level.tile.Tile;
+
 import java.util.Random;
 
 public class Screen {
@@ -37,17 +39,12 @@ public class Screen {
 
     public void render(int xOffset, int yOffset) {
         for (int y = 0; y < height; y++) {
-            int yy = y + yOffset;
-            // to keep from going off the screen and breaking the code
-            //if (yy < 0 || yy >= height) break;
-
+            int yp = y + yOffset;
+            if (yp < 0 || yp >= height) continue;
             for (int x = 0; x < width; x++){
-                int xx = x + xOffset;
-                //if (xx < 0 || xx >= width) break;
-
-
-
-                pixels[x + y * width] = Sprite.grass.pixels[(x&15) + (y&15) * Sprite.grass.SIZE];
+                int xp = x + xOffset;
+                if (xp < 0 || xp >= width) continue;
+                pixels[xp + yp * width] = Sprite.grass.pixels[(x&15) + (y&15) * Sprite.grass.SIZE];
 
 
             }
@@ -55,5 +52,18 @@ public class Screen {
 
 
     }
+    // Renders individual Tiles
+    public void renderTile(int xp, int yp, Tile tile) {
+        for (int y = 0; y < tile.sprite.SIZE; y++) {
+            // setting absolute
+            int ya = y + yp;
+            for (int x = 0; y < tile.sprite.SIZE; x++) {
+                // setting absolute location
+                int xa = x + xp;
+                if (xa < 0 || xa >= width || ya < 0 || ya >= width) break; // renders what is only visible on Screen-very important
+                pixels[xa+ya*width] = tile.sprite.pixels[x + y * tile.sprite.SIZE]; // the tiles dont get offset-their location does.
 
-}
+        }
+    }
+
+}}
