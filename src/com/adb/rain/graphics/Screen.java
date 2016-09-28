@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Screen {
 
-    private int width, height;
+    public int width, height;
     public int[] pixels;
     public final int MAP_SIZE = 8;
     public final int MAP_SIZE_MASK = MAP_SIZE - 1;
