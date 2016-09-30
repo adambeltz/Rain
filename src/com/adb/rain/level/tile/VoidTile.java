@@ -3,8 +3,9 @@ package com.adb.rain.level.tile;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.graphics.Sprite;
 
-public class GrassTile extends Tile {
-    public GrassTile(Sprite sprite) {
+public class VoidTile extends Tile{
+
+    public VoidTile(Sprite sprite) {
         super(sprite);
     }
 

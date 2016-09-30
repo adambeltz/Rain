@@ -1,10 +1,12 @@
-//finished game programming episode 32 from the cherno project
+// Finished video 41
 package com.adb.rain;
 
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.input.Keyboard;
+import com.adb.rain.level.Level;
+import com.adb.rain.level.RandomLevel;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -23,6 +25,7 @@ public class Game extends Canvas implements Runnable{
     private JFrame frame;
 
     private Keyboard key; // Imported from keyboard.java-as its a different package
+    private Level level;
     private boolean running = false;
 
     private Screen screen;
@@ -41,6 +44,8 @@ public class Game extends Canvas implements Runnable{
         frame = new JFrame();
 
         key = new Keyboard();
+        level = new RandomLevel(64,64);
+
         addKeyListener(key); // add this after key = new Keyboard();
 
 
@@ -123,8 +128,9 @@ public class Game extends Canvas implements Runnable{
 
         //Clears graphics off of screen before rendering again
         screen.clear();
+        level.render(x, y, screen);
 
-        screen.render(x, y);
+
 
         //sets pixel array data from Screen class to pixel array in game class
         for (int i = 0; i < pixels.length; i++) {
