@@ -12,8 +12,8 @@ public abstract class Mob extends Entity {
     public void move(int xa, int ya) {//parameters represent change on x and y axis
         if (xa > 0) dir = 1;
         if (xa < 0) dir = 3;
-        if (xa > 0) dir = 2;
-        if (xa < 0) dir = 0;
+        if (ya > 0) dir = 2;
+        if (ya < 0) dir = 0;
 
 
         if (!collision()){
