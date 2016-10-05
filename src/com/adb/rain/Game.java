@@ -1,6 +1,7 @@
-// Finished video 41
+// Finished video 45
 package com.adb.rain;
 
+import com.adb.rain.entity.mob.Player;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.input.Keyboard;
 import com.adb.rain.level.Level;
@@ -26,6 +27,7 @@ public class Game extends Canvas implements Runnable{
 
     private Keyboard key; // Imported from keyboard.java-as its a different package
     private Level level;
+    private Player player;
     private boolean running = false;
 
     private Screen screen;
@@ -45,6 +47,8 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
         level = new RandomLevel(64,64);
+        player = new Player(key);
+
 
         addKeyListener(key); // add this after key = new Keyboard();
 
@@ -106,14 +110,11 @@ public class Game extends Canvas implements Runnable{
 
     }
 
-    int x = 0, y = 0;
 
     public void update(){
         key.update();
-        if (key.up) y--;
-        if (key.down) y++;
-        if (key.left) x--;
-        if (key.right) x++;
+        player.update();
+
 
 
     }
@@ -128,7 +129,10 @@ public class Game extends Canvas implements Runnable{
 
         //Clears graphics off of screen before rendering again
         screen.clear();
-        level.render(x, y, screen);
+        int xScroll = player.x-screen.width/2;
+        int yScroll = player.y-screen.height/2;
+        level.render(xScroll, yScroll, screen);
+        player.render(screen);
 
 
 

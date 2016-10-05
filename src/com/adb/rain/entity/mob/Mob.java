@@ -9,7 +9,17 @@ public abstract class Mob extends Entity {
     protected int dir = 0;  // 0 is north...etc- dir is direction
     protected  boolean moving = false;
 
-    public void move() {
+    public void move(int xa, int ya) {//parameters represent change on x and y axis
+        if (xa > 0) dir = 1;
+        if (xa < 0) dir = 3;
+        if (xa > 0) dir = 2;
+        if (xa < 0) dir = 0;
+
+
+        if (!collision()){
+            x += xa;
+            y += ya;
+        }
 
     }
 
