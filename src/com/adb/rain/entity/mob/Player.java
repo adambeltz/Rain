@@ -80,7 +80,6 @@ public class Player extends Mob {
         if (dir == 3) {
             sprite = Sprite.player_side;
 
-            sprite = Sprite.player_forward;
             if (walking){
                 if(anim % 20 > 10) {
                     sprite = Sprite.player_side_1;
