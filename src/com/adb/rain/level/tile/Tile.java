@@ -25,6 +25,17 @@ public class Tile {
     public static Tile spawn_floor = new SpawnFloorTile(Sprite.spawn_floor);
 
 
+    // assigning colors from level map to tiles
+    public final static int col_spawn_grass = 0xff00ff00;
+    public final static int col_spawn_hedge = 0;
+    public final static int col_spawn_water = 0;
+    public final static int col_spawn_wall1 = 0xff333333;
+    public final static int col_spawn_wall2 = 0xff000000;
+    public final static int col_spawn_floor = 0xb8442f;
+
+
+
+
 
     public Tile(Sprite sprite){
         this.sprite = sprite;
