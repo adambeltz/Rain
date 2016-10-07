@@ -31,7 +31,7 @@ public class Tile {
     public final static int col_spawn_water = 0;
     public final static int col_spawn_wall1 = 0xff333333;
     public final static int col_spawn_wall2 = 0xff000000;
-    public final static int col_spawn_floor = 0xb8442f;
+    public final static int col_spawn_floor = 0xffb8442f;
 
 
 

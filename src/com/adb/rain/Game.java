@@ -5,7 +5,6 @@ import com.adb.rain.entity.mob.Player;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.input.Keyboard;
 import com.adb.rain.level.Level;
-import com.adb.rain.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +45,7 @@ public class Game extends Canvas implements Runnable{
         frame = new JFrame();
 
         key = new Keyboard();
-        level = new SpawnLevel("/levels/level.png");
+        level = Level.spawn;
         player = new Player(6 * 16, 4 * 16, key);
 
 
