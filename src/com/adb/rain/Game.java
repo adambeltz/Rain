@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
         level = Level.spawn;
-        player = new Player(6 * 16, 4 * 16, key);
+        player = new Player(300, 300, key);
 
 
         addKeyListener(key); // add this after key = new Keyboard();
