@@ -5,6 +5,7 @@ import com.adb.rain.entity.mob.Player;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.input.Keyboard;
 import com.adb.rain.level.Level;
+import com.adb.rain.level.TileCoordinate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +47,8 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
         level = Level.spawn;
-        player = new Player(300, 300, key);
+        TileCoordinate playerSpawn = new TileCoordinate(19, 62);
+        player = new Player(playerSpawn.x(), playerSpawn.y(), key);
 
 
         addKeyListener(key); // add this after key = new Keyboard();
