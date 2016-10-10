@@ -11,6 +11,12 @@ public abstract class Mob extends Entity {
     protected boolean walking = false;
 
     public void move(int xa, int ya) {//parameters represent change on x and y axis
+        if (xa != 0 && ya != 0) {//splits movement up into two if the player is moving on a diagonal
+            move(xa, 0);
+            move(0,ya);
+            return;// exit out so that on a diagonal the player doesnt move twice
+        }
+
         if (xa > 0) dir = 1;
         if (xa < 0) dir = 3;
         if (ya > 0) dir = 2;
@@ -30,8 +36,14 @@ public abstract class Mob extends Entity {
 
     private boolean collision(int xa, int ya) {
         boolean solid = false;
-        if (level.getTile((x+xa)/16, (y+ya)/16).solid()) solid = true;
-        //System.out.println((x+xa)/16 + " "+ (y + ya)/16);
+        //checks all four corners to see if a tile is solid
+        for (int c = 0; c < 4; c++) {
+            //these 2 lines control the area that is collidable
+            int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
+            int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
+
+            if (level.getTile(xt, yt).solid()) solid = true;
+        }
         return solid;
     }
 
