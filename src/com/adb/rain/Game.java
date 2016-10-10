@@ -4,6 +4,7 @@ package com.adb.rain;
 import com.adb.rain.entity.mob.Player;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.input.Keyboard;
+import com.adb.rain.input.Mouse;
 import com.adb.rain.level.Level;
 import com.adb.rain.level.TileCoordinate;
 
@@ -51,8 +52,13 @@ public class Game extends Canvas implements Runnable{
         player = new Player(playerSpawn.x(), playerSpawn.y(), key);
         player.init(level);
 
-
+        //adds keyboard and mouse to canvas-very important
         addKeyListener(key); // add this after key = new Keyboard();
+
+        Mouse mouse = new Mouse();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
+
 
 
     }
@@ -144,14 +150,12 @@ public class Game extends Canvas implements Runnable{
         }
 
         Graphics g = bs.getDrawGraphics();
-        // Set the color of g - will fill Rect with this color
-        g.setColor(Color.BLACK);
-        // Fill the frame with the size
-        g.fillRect(0, 0, getWidth(), getHeight());
+
 
 
         // draws from pixel data
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        
 
         // Removes the graphics from the screen after they have been displayed
         g.dispose();
