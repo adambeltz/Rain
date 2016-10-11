@@ -1,7 +1,12 @@
 package com.adb.rain.entity.mob;
 
 import com.adb.rain.entity.Entity;
+import com.adb.rain.entity.projectile.Projectile;
+import com.adb.rain.entity.projectile.WizardProjectile;
 import com.adb.rain.graphics.Sprite;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Mob extends Entity {
 
@@ -9,6 +14,8 @@ public abstract class Mob extends Entity {
     protected int dir = 0;  // 0 is north...etc- dir is direction
     protected  boolean moving = false;
     protected boolean walking = false;
+
+    protected List<Projectile> projectiles = new ArrayList<Projectile>();
 
     public void move(int xa, int ya) {//parameters represent change on x and y axis
         if (xa != 0 && ya != 0) {//splits movement up into two if the player is moving on a diagonal
@@ -35,7 +42,10 @@ public abstract class Mob extends Entity {
     }
 
     protected void shoot(int x, int y, double dir) {
-        System.out.println("angle = " + dir );
+        //dir *= 180 / Math.PI;
+        Projectile p = new WizardProjectile(x, y, dir);
+        projectiles.add(p);
+        level.add(p);
 
     }
 
