@@ -1,8 +1,10 @@
 package com.adb.rain.entity.mob;
 
+import com.adb.rain.Game;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.graphics.Sprite;
 import com.adb.rain.input.Keyboard;
+import com.adb.rain.input.Mouse;
 
 public class Player extends Mob {
     private Keyboard input;
@@ -32,6 +34,7 @@ public class Player extends Mob {
         if (input.left) xa--;
         if (input.right) xa++;
 
+
         if (xa != 0 || ya != 0) {
             move(xa, ya);
             walking = true;
@@ -39,6 +42,19 @@ public class Player extends Mob {
 
         }
 
+        updateShooting();
+
+
+
+    }
+
+    private void updateShooting() {
+        if (Mouse.getButton() == 1) {
+            double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+            double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+            double dir = Math.atan2(dy, dx);
+            shoot(x, y, dir);
+        }
     }
 
     public void render(Screen screen) {

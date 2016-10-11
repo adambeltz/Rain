@@ -1,4 +1,4 @@
-// Finished video 60
+// Finished video 66
 package com.adb.rain;
 
 import com.adb.rain.entity.mob.Player;
@@ -18,9 +18,9 @@ import java.awt.image.DataBufferInt;
 public class Game extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
 
-    public static int width = 300;
-    public static int height = width / 16* 9;
-    public static int scale = 3;
+    private static int width = 300;
+    private static int height = width / 16* 9;
+    private static int scale = 3;
     public static String title = "Rain";
 
     private Thread thread;
@@ -61,6 +61,14 @@ public class Game extends Canvas implements Runnable{
 
 
 
+    }
+
+    public static int getWindowWidth(){
+        return width * scale;
+    }
+
+    public static int getWindowHeight(){
+        return height * scale;
     }
 
     public synchronized void start() {
@@ -155,7 +163,7 @@ public class Game extends Canvas implements Runnable{
 
         // draws from pixel data
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-        
+
 
         // Removes the graphics from the screen after they have been displayed
         g.dispose();

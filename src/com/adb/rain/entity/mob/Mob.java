@@ -34,6 +34,11 @@ public abstract class Mob extends Entity {
 
     }
 
+    protected void shoot(int x, int y, double dir) {
+        System.out.println("angle = " + dir );
+
+    }
+
     private boolean collision(int xa, int ya) {
         boolean solid = false;
         //checks all four corners to see if a tile is solid
