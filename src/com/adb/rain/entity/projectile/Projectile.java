@@ -3,6 +3,8 @@ package com.adb.rain.entity.projectile;
 import com.adb.rain.entity.Entity;
 import com.adb.rain.graphics.Sprite;
 
+import java.util.Random;
+
 public class Projectile extends Entity{
 
     protected final int xOrigin, yOrigin;
@@ -11,7 +13,8 @@ public class Projectile extends Entity{
     protected double x, y;
     protected double nx, ny;
     protected double distance;
-    protected double speed, rateOfFire, range, damage;
+    protected double speed, range, damage;
+    protected final Random random = new Random();
 
     public Projectile(int x, int y, double dir) {
         xOrigin = x;
