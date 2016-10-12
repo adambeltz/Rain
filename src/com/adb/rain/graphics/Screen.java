@@ -75,7 +75,7 @@ public class Screen {
                 }
                 int col = p.getSprite().pixels[x + y * p.getSprite().SIZE];
                 if (col != 0xffff00ff) pixels[xa + ya * width] = col;
-                 
+
 
             }
 

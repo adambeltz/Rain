@@ -35,6 +35,7 @@ public abstract class Mob extends Entity {
             y += ya;
         }
 
+
     }
 
     public void update(){

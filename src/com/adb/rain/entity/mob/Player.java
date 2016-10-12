@@ -1,6 +1,7 @@
 package com.adb.rain.entity.mob;
 
 import com.adb.rain.Game;
+import com.adb.rain.entity.projectile.Projectile;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.graphics.Sprite;
 import com.adb.rain.input.Keyboard;
@@ -41,11 +42,18 @@ public class Player extends Mob {
         } else { walking = false;
 
         }
-
+        clear();
         updateShooting();
 
 
 
+    }
+
+    private void clear() {
+        for (int i =0; i < projectiles.size(); i++) {
+            Projectile p = projectiles.get(i);
+            if (p.isRemoved()) projectiles.remove(i);
+        }
     }
 
     private void updateShooting() {
