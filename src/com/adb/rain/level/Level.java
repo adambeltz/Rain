@@ -60,6 +60,20 @@ public class Level {
 
     }
 
+    public boolean tileCollision(double x, double y, double xa, double ya, int size) {
+        boolean solid = false;
+        //checks all four corners to see if a tile is solid
+        for (int c = 0; c < 4; c++) {
+            //these 2 lines control the area that is collidable
+            int xt = (((int)x + (int)xa) + c % 2 * size * 2 - 12) / 16;
+            int yt = (((int)y + (int)ya) + c / 2 * size / 10 + 8) / 16;
+
+            if (getTile(xt, yt).solid()) solid = true;
+        }
+        return solid;
+    }
+
+
     public void render (int xScroll, int yScroll, Screen screen) {
         screen.setOffset(xScroll, yScroll);
         // added 4 corner pins to define the area we want to render
@@ -89,6 +103,7 @@ public class Level {
     }
 
     public void addProjectile(Projectile p) {
+        p.init(this);
         projectiles.add(p);
 
     }
