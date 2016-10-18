@@ -1,6 +1,6 @@
 package com.adb.rain.entity.projectile;
 
-import com.adb.rain.entity.particle.Particle;
+import com.adb.rain.entity.spawner.ParticleSpawner;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.graphics.Sprite;
 
@@ -23,8 +23,9 @@ public class WizardProjectile extends Projectile {
 
     public void update(){
         if(level.tileCollision(x, y, nx, ny, 7)) {
-            Particle p = new Particle((int)x, (int)y, 50, 500);
-            level.add(p);
+
+            level.add(new ParticleSpawner((int)x, (int)y, 44, 50, level));
+
             remove();
         }
 

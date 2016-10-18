@@ -1,6 +1,7 @@
 package com.adb.rain.level;
 
 import com.adb.rain.entity.Entity;
+import com.adb.rain.entity.particle.Particle;
 import com.adb.rain.entity.projectile.Projectile;
 import com.adb.rain.graphics.Screen;
 import com.adb.rain.level.tile.Tile;
@@ -18,6 +19,7 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<Entity>();
     private List<Projectile> projectiles = new ArrayList<Projectile>();
+    private List<Particle> particles = new ArrayList<Particle>();
 
 
     public static Level spawn = new SpawnLevel("/levels/spawn.png");
@@ -34,8 +36,9 @@ public class Level {
         generateLevel();
     }
 
-    protected void generateLevel() {
 
+    protected void generateLevel() {
+//Cherno has somestuff here!!!!
     }
 
     protected void loadLevel(String path){
@@ -43,14 +46,35 @@ public class Level {
     }
 
     public void update() {
+        for (int i = 0; i < projectiles.size(); i++) {
+            projectiles.get(i).update();
+        }
+        for (int i = 0; i < particles.size(); i++) {
+            particles.get(i).update();
+        }
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).update();
         }
 
+
+        remove();
+    }
+
+    private void remove(){
+        for (int i = 0; i < entities.size(); i++) {
+            if (entities.get(i).isRemoved()) entities.remove(i);
+        }
+
         for (int i = 0; i < projectiles.size(); i++) {
-            projectiles.get(i).update();
+            if (projectiles.get(i).isRemoved()) projectiles.remove(i);
+        }
+
+        for (int i = 0; i < particles.size(); i++) {
+            if (particles.get(i).isRemoved()) particles.remove(i);
         }
     }
+
+
 
     public List<Projectile> getProjectiles(){
         return projectiles;
@@ -96,17 +120,28 @@ public class Level {
         for (int i = 0; i < projectiles.size(); i++) {
             projectiles.get(i).render(screen);
         }
+        for (int i = 0; i < particles.size(); i++) {
+            particles.get(i).render(screen);
+        }
     }
 
     public void add(Entity e) {
-        entities.add(e);
+        e.init(this);
+        if (e instanceof Particle) {
+            particles.add((Particle) e);
+        }else if (e instanceof Projectile){
+            projectiles.add((Projectile)e);
+
+
+        }else{
+            entities.add(e);
+
+        }
+
+
     }
 
-    public void addProjectile(Projectile p) {
-        p.init(this);
-        projectiles.add(p);
 
-    }
 
 
 
