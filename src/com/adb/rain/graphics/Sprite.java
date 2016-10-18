@@ -2,6 +2,7 @@ package com.adb.rain.graphics;
 
 public class Sprite {
     public final int SIZE;
+    private int width, height;
 
     private int x, y;  //Coordinates of the sprite
     public int[] pixels;
@@ -41,8 +42,13 @@ public class Sprite {
     // Projectile Sprites here
     public static Sprite projectile_wizard = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
 
+    // Particles
+    public static Sprite particle_normal = new Sprite(3, 0xAAAAAA);
+
     public Sprite(int size, int x, int y, SpriteSheet sheet){ // x,y are locations on spritesheet
         SIZE = size;
+        this.width = size;
+        this.height = size;
         pixels = new int[SIZE * SIZE]; // An array the size of the sprite
         // Set location of target sprite in spritesheet
         this.x = x * size;
@@ -52,17 +58,36 @@ public class Sprite {
 
     }
 
+    public Sprite (int width, int height, int color) {
+        SIZE = -1;
+        this.width = width;
+        this.height = height;
+        pixels= new int[width * height];
+        setColor(color);
+
+    }
+
     public Sprite(int size, int color){
         SIZE = size;
+        this.width = size;
+        this.height = size;
         pixels = new int[SIZE * SIZE];
         setColor(color);
     }
 
     private void setColor(int color) {
-        for (int i = 0; i < SIZE * SIZE; i++) {
+        for (int i = 0; i < width * height; i++) {
             pixels[i] = color;
         }
 
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public int getWidth(){
+        return width;
     }
 
     // Access spritesheets pixels and find right sprite then extracting pixels from appropriate sprite

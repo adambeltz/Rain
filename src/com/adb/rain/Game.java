@@ -153,6 +153,8 @@ public class Game extends Canvas implements Runnable{
 
 
 
+
+
         //sets pixel array data from Screen class to pixel array in game class
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
