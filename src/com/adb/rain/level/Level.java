@@ -84,13 +84,13 @@ public class Level {
 
     }
 
-    public boolean tileCollision(int x, int y, int size) {
+    public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset) {
         boolean solid = false;
         //checks all four corners to see if a tile is solid
         for (int c = 0; c < 4; c++) {
             //these 2 lines control the area that is collidable->>4 is same as divide by 16
-            int xt = (x - c % 2 * size) >> 4;
-            int yt = (y - c / 2 * size) >> 4;
+            int xt = (x - c % 2 * size + xOffset) >> 4;
+            int yt = (y - c / 2 * size + yOffset) >> 4;
 
             if (getTile(xt, yt).solid()) solid = true;
         }
